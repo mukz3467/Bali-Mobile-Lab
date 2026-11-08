@@ -3,8 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       repository:
-        description: Public GitHub repository (owner/name)
+        description: Android project repository (owner/name)
         required: true
+        default: mukz3467/Noor-e-hidayat-2
         type: string
       ref:
         description: Branch or tag to build

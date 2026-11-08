@@ -1,29 +1,25 @@
 # Bali Mobile Lab
 
-Personal, free, mobile-friendly GitHub project workspace published as a static GitHub Pages site.
+Personal Android app testing workspace for the Noor-e-Hidayat project.
 
-## Features
-- Browse public GitHub repositories, branches, folders, and files.
-- Preview standalone HTML files in a sandboxed iframe.
-- Inspect an APK selected from the phone: filename, size, and SHA-256. The APK is processed locally and is not uploaded.
-- Run the included GitHub Actions workflow to build a debug APK from a selected public Android Gradle repository.
+## What this workspace does
+- Provides a mobile-friendly testing dashboard; source code is hidden from the main interface.
+- Builds a real Android debug APK from the public GitHub repository `mukz3467/Noor-e-hidayat-2`.
+- Shows the latest GitHub Actions build status.
+- Provides a phone-side checklist for testing real app features.
+- Lets you inspect the APK filename, size, and SHA-256 locally in the browser.
 
-## Limitations
-- Static browser app: no backend, paid API, cloud emulator, or Android virtual device.
-- Native APK files cannot execute in this browser workspace.
-- Standalone HTML preview is not a framework build. React, Vue, Vite, and similar projects require their own build/hosting environment.
-- Public repositories only; GitHub unauthenticated API rate limits apply.
+## Build and test Noor-e-Hidayat
+1. Open the dashboard and tap **Build latest Noor-e-Hidayat APK**.
+2. In GitHub Actions, choose **Run workflow**. The repository and `main` branch are pre-filled.
+3. Wait for the workflow to finish. Open the successful run and download the `debug-apk` artifact.
+4. Extract the ZIP, install the APK on your Android phone, and test the actual native app.
 
-## Publish using GitHub Pages
-Open Settings > Pages. Select Deploy from a branch, choose main and /(root), then Save. Wait for the Pages URL to appear in Settings > Pages.
+## Important limitation
+This static GitHub Pages dashboard is not an Android emulator and does not execute APKs in the browser. Real native app testing happens after installing the built APK on an Android device. No fake phone frame or website iframe is presented as a native app preview.
 
-## Build an Android APK
-1. Open Actions > Build Android APK > Run workflow in this repository.
-2. Enter the public Android project repository as owner/name, for example owner/project, and its branch or tag.
-3. Run the workflow and wait for completion.
-4. Download the debug-apk artifact from the completed run.
+## Build requirements
+The workflow uses Java 17 and Gradle 9.3.1, then runs `gradle assembleDebug`. It is configured for the public Noor-e-Hidayat repository by default. GitHub Actions usage is subject to GitHub account limits.
 
-The selected project must have a Gradle wrapper at its root and an Android application module that supports assembleDebug. Private repositories and projects requiring extra secrets or custom build steps are not supported by this simple workflow.
-
-## Privacy
-Repository browsing uses public GitHub API endpoints. APK file inspection is local to the browser tab; no APK upload endpoint exists.
+## Publish
+Open repository Settings > Pages. Choose **Deploy from a branch**, branch `main`, folder `/(root)`, then Save. Use the Pages URL displayed by GitHub after deployment completes.

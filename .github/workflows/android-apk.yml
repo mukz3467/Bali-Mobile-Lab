@@ -1,18 +1,25 @@
 name: Build Android APK
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '**/*.gradle'
-      - '**/*.gradle.kts'
-      - 'gradlew'
-      - 'gradle/**'
+    inputs:
+      repository:
+        description: Public GitHub repository (owner/name)
+        required: true
+        type: string
+      ref:
+        description: Branch or tag to build
+        required: true
+        default: main
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
+      - name: Checkout selected Android project
         uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
